@@ -34,7 +34,8 @@ ENV PYTHONFAULTHANDLER=1 \
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN adduser --disabled-password 'user'
+RUN adduser --disabled-password -u 1000 user
+RUN chown -R 1000:1000 /app
 
 USER user
 

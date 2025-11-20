@@ -8,5 +8,5 @@ services:
     ports:
       - "${PORT}:${PORT}"
     volumes:
-      - ./app/cpvp_ultra.db:/app/cpvp_ultra.db
+      - ./app:/app/app
     restart: unless-stopped
