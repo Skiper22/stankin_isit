@@ -1,4 +1,5 @@
 from datetime import datetime, date, timedelta
+from pathlib import Path
 from typing import Optional, List, Dict, Any
 import secrets
 
@@ -8,6 +9,10 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlmodel import SQLModel, Field, Session, create_engine, select
+
+
+BASE_DIR = Path(__file__).resolve().parent
+DB_PATH = BASE_DIR / "cpvp_ultra.db"
 
 API_VERSION = "v1"
 
@@ -135,7 +140,7 @@ class Event(SQLModel, table=True):
     meta: Optional[str] = None
 
 
-engine = create_engine("sqlite:///cpvp_ultra.db", echo=False)
+engine = create_engine(f"sqlite:///{DB_PATH}", echo=False, connect_args={"check_same_thread": False})
 
 
 def create_db_and_seed():
@@ -301,12 +306,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
 
 
 @app.get("/")
 def index():
-    return FileResponse("frontend/index.html")
+    return FileResponse(str(BASE_DIR / "frontend" / "index.html"))
 
 
 @app.post(f"/api/{API_VERSION}/auth/login")

@@ -1,0 +1,12 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stankin_isit_web
+    env_file: .env
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - ./app/cpvp_ultra.db:/app/cpvp_ultra.db
+    restart: unless-stopped
