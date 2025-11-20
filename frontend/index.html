@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ЦПВП — Сводка холдинга</title>
+  <link rel="stylesheet" href="/static/styles.css"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="min-h-screen">
+  <!-- Marketing header (hidden after login) -->
+  <header id="marketingHeader" class="app-topbar">
+    <div class="max-w-6xl mx-auto px-4 py-6 grid md:grid-cols-2 gap-4 items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-b from-indigo-400/60 to-blue-500/40 border border-white/20"></div>
+        <div>
+          <div class="text-2xl font-bold">ЦПВП</div>
+          <div class="text-slate-300 text-sm">Цифровая платформа планирования и взаимодействия</div>
+        </div>
+      </div>
+      <div class="text-right">
+        <button id="btnLogin" class="btn-primary">Войти</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- App shell -->
+  <div id="appShell" class="hidden grid md:grid-cols-[260px_1fr] gap-4 max-w-7xl mx-auto px-4 py-6">
+    <aside class="card h-[calc(100vh-6rem)] sticky top-4">
+      <div class="text-lg font-semibold mb-2">Навигация</div>
+      <nav class="flex flex-col gap-2" id="nav">
+        <button data-view="dashboard" class="btn-ghost text-left">📊 Сводка холдинга</button>
+        <button data-view="sites" class="btn-ghost text-left">🏭 Площадки</button>
+        <button data-view="equipment" class="btn-ghost text-left">⚙️ Оборудование</button>
+        <button data-view="inventory" class="btn-ghost text-left">📦 Материалы и склад</button>
+
+        <!-- Модули из ТЗ -->
+        <button data-view="workorders" class="btn-ghost text-left">🛠 Заявки ТОиР</button>
+        <button data-view="supply" class="btn-ghost text-left">🧾 Снабжение</button>
+        <button data-view="planning" class="btn-ghost text-left">🗓 Планирование</button>
+
+        <button data-view="inbox" class="btn-ghost text-left">🔔 Уведомления</button>
+        <button data-view="reports" class="btn-ghost text-left">📈 Отчёты</button>
+        <button data-view="users" class="btn-ghost text-left">👤 Пользователи и роли</button>
+
+        <div class="mt-4 text-slate-400 text-sm">
+          Пользователь: <span id="userLogin"></span>
+        </div>
+      </nav>
+    </aside>
+    <main id="view"></main>
+  </div>
+
+  <!-- Login modal -->
+  <div id="loginModal" class="hidden fixed inset-0 bg-black/60 grid place-items-center">
+    <div class="card w-[420px]">
+      <div class="text-xl font-semibold mb-2">Вход в систему</div>
+      <div class="grid gap-3">
+        <label class="field">
+          <span>Логин</span>
+          <input id="login" class="input" placeholder="Например: admin">
+        </label>
+        <label class="field">
+          <span>Пароль</span>
+          <input id="password" type="password" class="input" placeholder="Например: admin">
+        </label>
+        <button id="doLogin" class="btn-primary">Войти</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
